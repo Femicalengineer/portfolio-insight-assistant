@@ -116,4 +116,15 @@ Practical "how do I actually do X" reference for this project — the concrete c
 
 4. **Refresh-token persistence inside a container is a known open item, not yet fully solved** (see `DECISIONS.md`): there's no `.env` file inside a container to write the rotated token back to, so `get_access_token` currently just skips that step gracefully when none exists. This means a container can successfully call `get_quote` once per token it was started with; a second call or a restart needs a fresh one. The real fix (keeping a rotating credential valid across restarts on a real deployed service) is deferred to the actual Render deploy.
 
+## Deploying to Render
+
+- GitHub repo: `github.com/Femicalengineer/portfolio-insight-assistant` — pushed with `git add` / `git commit` / `git remote add origin <url>` / `git push -u origin main`.
+- Render dashboard → **New** → **Web Service** → connect the GitHub repo.
+- **Root Directory**: `012_app/mcp_server` — the Dockerfile isn't at the repo root, so Render needs to know where to actually find it and build its context from.
+- **Dockerfile Path**: `012_app/mcp_server/Dockerfile` — per Render's own field description, this one is relative to the *repo root*, not the Root Directory above (a real, easy-to-miss distinction between the two fields).
+- Environment variable: `QUESTRADE_REFRESH_TOKEN` set directly in Render's dashboard (not committed anywhere in the repo) — needs to be a **currently valid** token, checked directly against Questrade before pasting it in, since a stale one fails the exact same way it does locally.
+- Deployed URL: `https://portfolio-insight-assistant.onrender.com`
+
+**Sanity check:** same two-step check as local Docker testing, just against the real URL instead of `localhost` — `curl https://portfolio-insight-assistant.onrender.com/health`, then point `test_servers.py`'s `Client(...)` at `https://portfolio-insight-assistant.onrender.com/mcp` and confirm `get_quote` still works for real.
+
 **Sanity check, in order:** `docker ps -a` confirms the container is running and shows its actual port mapping; `curl`/browser against `/health` on the **host**-side port confirms the server is reachable at all; the MCP test script (pointed at `http://localhost:<host_port>/mcp`) confirms `get_quote` works end-to-end through the container. If something fails, `docker logs <container name>` shows the real traceback happening inside the container — often more informative than whatever error message made it back to the client.

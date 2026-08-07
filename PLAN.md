@@ -111,7 +111,6 @@ Internal order revised 2026-08-03 (see `DECISIONS.md`, "012a internal build orde
 
 ## Open decisions not yet locked in
 
-- Final deployment platform (Render recommended, not yet confirmed as final)
 - Exact eval-set design for the Portfolio Analyst's ground-truth math checks
 - Whether the Gradio frontend gets its own deploy target or stays local-only for the demo
 
@@ -121,6 +120,6 @@ As of 2026-08-06, 012a steps 1–2 are done, and step 3 is nearly done:
 
 - **Step 1** (Questrade practice account + refresh token) — done.
 - **Step 2** (`get_quote` built and proven locally) — done: OAuth token exchange with rotation/persistence handled, symbol lookup + quote fetch working, wrapped as an `@mcp.tool()`, confirmed working over both stdio and http transports locally.
-- **Step 3** (`/health` + Dockerize + deploy to Render) — `/health` added and confirmed working (`@mcp.custom_route`, tested via curl/browser). Dockerized, confirmed working end-to-end in a local container (including the `host="0.0.0.0"` binding fix and the port-mapping gotchas — see `RUNBOOK.md`). **Not yet done:** the actual deploy to Render itself, and the refresh-token-persistence-inside-a-container gap flagged in `DECISIONS.md` needs a real fix before that deploy (currently just skips persistence gracefully, which only survives one call per container).
+- **Step 3** (`/health` + Dockerize + deploy to Render) — **done.** `/health` working (`@mcp.custom_route`), Dockerized (including the `host="0.0.0.0"` binding fix and port-mapping gotchas), refresh-token persistence solved with in-memory access-token caching (see `DECISIONS.md`), pushed to GitHub (`github.com/Femicalengineer/portfolio-insight-assistant`), and deployed live on Render — `/health` and `get_quote` both confirmed working against the actual deployed public URL, not just locally. This is the 012a isolated deploy-risk proof, fully closed out.
 
 Steps 4–6 (building the other two specialists + `main_portfolio_agent`, top-down) not yet started. Full practical detail on everything done so far is in `RUNBOOK.md`.

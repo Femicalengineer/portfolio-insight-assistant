@@ -131,10 +131,10 @@ Each entry: the decision, the options considered, and the reasoning.
 - **Decision:** add both — a `/health` endpoint on each deployed service (FastAPI agent service and the MCP server), plus structured application logging, in addition to LangSmith
 - **Reasoning:** LangSmith answers "what did the agent decide and why" but has no concept of whether the container itself is healthy or running — that's a genuinely different question, and the original Capstone scope (Roadmap.md) already called for "light production monitoring" without making it concrete. A `/health` endpoint is the standard way any platform (Render included) or a human checks liveness without exercising real logic. Structured logging means `docker logs`/Render's log dashboard actually show meaningful events (requests received, errors, key state transitions) instead of silence. This is genuinely new territory not covered by any existing notebook — will need a ground-up explanation (what a health-check endpoint is *for*, what "structured logging" means vs. plain `print()`) when 012b actually gets built, per the established habit of explaining new tools before showing their code.
 
-### Deployment platform: Render (recommended, not yet finalized)
+### Deployment platform: Render (confirmed final)
 - **Options considered:** Render, Fly.io, Railway, Google Cloud Run
-- **Decision so far:** leaning Render
-- **Reasoning:** connects directly to a GitHub repo and auto-builds from the existing Dockerfile, free tier available, no new CLI tool required for what would be Sarah's first-ever cloud deploy. Not yet locked in — worth revisiting once 012a actually gets there, in case a different platform's tradeoffs matter more once the real requirements are clearer.
+- **Decision:** Render
+- **Reasoning:** connects directly to a GitHub repo and auto-builds from the existing Dockerfile, free tier available, no new CLI tool required for Sarah's first-ever cloud deploy. Confirmed 2026-08-06 — the MCP server (`questrade_mcp_server.py`) is live at `https://portfolio-insight-assistant.onrender.com`, `/health` and `get_quote` both proven working against the real deployed URL. One real config gotcha worth remembering (see `RUNBOOK.md`): Render's "Root Directory" and "Dockerfile Path" fields both needed setting to `012_app/mcp_server` (and `012_app/mcp_server/Dockerfile` respectively) since the Dockerfile isn't at the repo root — a monorepo-style layout, not the single-service default Render's UI assumes.
 
 ---
 
