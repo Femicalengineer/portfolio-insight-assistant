@@ -128,3 +128,22 @@ Practical "how do I actually do X" reference for this project — the concrete c
 **Sanity check:** same two-step check as local Docker testing, just against the real URL instead of `localhost` — `curl https://portfolio-insight-assistant.onrender.com/health`, then point `test_servers.py`'s `Client(...)` at `https://portfolio-insight-assistant.onrender.com/mcp` and confirm `get_quote` still works for real.
 
 **Sanity check, in order:** `docker ps -a` confirms the container is running and shows its actual port mapping; `curl`/browser against `/health` on the **host**-side port confirms the server is reachable at all; the MCP test script (pointed at `http://localhost:<host_port>/mcp`) confirms `get_quote` works end-to-end through the container. If something fails, `docker logs <container name>` shows the real traceback happening inside the container — often more informative than whatever error message made it back to the client.
+
+## Building `consult_market_trading_specialist` (step 4)
+
+- Load the deployed MCP server's tools with `MultiServerMCPClient` (from `langchain_mcp_adapters.client` — a separate package, not `langchain.mcp_adapters`), `http` transport, pointed at the live URL's `/mcp` path:
+  ```python
+  client = MultiServerMCPClient({
+      "questrade": {"transport": "http", "url": "https://portfolio-insight-assistant.onrender.com/mcp"}
+  })
+  tools = await client.get_tools()  # async -- needs await
+  ```
+- Build the specialist with `create_agent(model=..., system_prompt=..., tools=tools)`, same as any other agent in this curriculum.
+- **Don't invoke the specialist inside its own definition file.** Matches 005's `hr_agent` pattern exactly: the agent is defined once, and only ever invoked either through a separate test script or (later) through a `@tool`-wrapped function that a supervisor calls — never a standalone `.invoke()` call sitting in the same file as the `create_agent(...)` call itself.
+- Since building the agent requires an `await` (loading MCP tools is async), the definition file's entry point needs to be an `async def` function that **returns** the built agent, wrapped in `if __name__ == "__main__":` — not a bare `asyncio.run(...)` at module level, which would fire as a side effect the moment the file is *imported*, not just when run directly.
+- **Invoking a `create_agent` result always takes a dict matching its State schema, never a bare string:** `agent.invoke({"messages": [{"role": "user", "content": "..."}]})` (or `await agent.ainvoke(...)` in an async context). This is because `create_agent` runs on a LangGraph `MessagesState` schema (`{"messages": [...]}`, using an `add_messages` reducer that appends rather than overwrites) — not a simple one-variable LCEL chain, which is the context where invoking with a plain string works.
+- Result access is dict-style, not attribute-style: `result["messages"][-1].content`, never `result.messages`.
+- **Debugging a tool error inside an agent:** `create_agent` catches tool errors and feeds them back to the model as a `ToolMessage`, which the model then paraphrases vaguely ("I encountered an error..."). The real error is inside `result["messages"]` — print the full list, not just the last message, to find the actual `ToolMessage` content.
+- **The deployed service has its own separate copy of `QUESTRADE_REFRESH_TOKEN`, set in Render's dashboard — updating local `.env` alone does not fix a stale token there.** Both need updating independently when the token dies (which happens more often than expected — see `DECISIONS.md`'s note on the accepted in-memory-caching tradeoff). Updating an env var through Render's dashboard UI triggers an automatic redeploy; if it doesn't, there's a manual "Deploy" button.
+
+**Sanity check:** ask the specialist a real question (e.g. "what is the price of AAPL stock?") and confirm it correctly chooses to call `get_quote` and returns a real answer — not just that the file runs without crashing.
