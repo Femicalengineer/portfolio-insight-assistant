@@ -147,3 +147,14 @@ Practical "how do I actually do X" reference for this project — the concrete c
 - **The deployed service has its own separate copy of `QUESTRADE_REFRESH_TOKEN`, set in Render's dashboard — updating local `.env` alone does not fix a stale token there.** Both need updating independently when the token dies (which happens more often than expected — see `DECISIONS.md`'s note on the accepted in-memory-caching tradeoff). Updating an env var through Render's dashboard UI triggers an automatic redeploy; if it doesn't, there's a manual "Deploy" button.
 
 **Sanity check:** ask the specialist a real question (e.g. "what is the price of AAPL stock?") and confirm it correctly chooses to call `get_quote` and returns a real answer — not just that the file runs without crashing.
+
+## Extracting the MPT deck into a RAG-ready corpus
+
+- The `Read` tool can't open `.pptx` files directly (binary format, unsupported) — use `python-pptx` (`pip install python-pptx`) instead.
+- Per slide: `slide.shapes` gives you the text frames (`shape.text_frame.text`) and pictures (`shape.shape_type == 13`, then `shape.image.blob` to get the raw image bytes to save as a file); `slide.notes_slide.notes_text_frame.text` gives the speaker notes.
+- **Don't assume text/notes alone capture the real content.** For this deck specifically, most of the substantive material is in charts/diagrams (efficient frontier plots, CAL diagrams), not slide text — extracted images were reviewed directly (via the `Read` tool's image support) and given a written description, folded into the same corpus entries the text/notes live in. See `DECISIONS.md` for why this was chosen over notes-only or full multimodal retrieval.
+- **Not every image is a chart worth describing** — one slide in this deck turned out to be an unrelated interactive quiz question (not a plot at all), and some "images" on a single slide are really animation fragments of one diagram, not distinct content. Worth actually looking before writing a description for each one, rather than assuming every embedded image is meaningful content.
+- Final corpus is a structured list, one entry per slide (`{"slide": n, "title": ..., "text": [...], "notes": ..., "image_descriptions": [...]}`) — not a single flattened document — specifically so slide number/section metadata survives for `SelfQueryRetriever` later, per the retrieval techniques already committed to in `DECISIONS.md`.
+- Output: `012_app/agent_service/data/mpt_deck_content.json`, scoped to slides 3–6 and 26–48 only (see `DECISIONS.md`'s knowledge-base-scope decision) — 27 slide entries, 10 with image descriptions.
+
+**Sanity check:** spot-check a few entries against the actual deck — does the extracted text/notes match what's on the slide, and does the written image description actually match what the chart shows (numbers, axis labels, the specific relationship being illustrated), not just a generic "this is a chart about portfolio theory."

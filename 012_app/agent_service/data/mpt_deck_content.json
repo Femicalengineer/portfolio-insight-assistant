@@ -1,0 +1,278 @@
+[
+  {
+    "slide": 3,
+    "title": "Wealth or Rate of Return?",
+    "text": [
+      "Wealth or Rate of Return?"
+    ],
+    "notes": "When you maximize one you maximize the other",
+    "image_descriptions": []
+  },
+  {
+    "slide": 4,
+    "title": "How to Calculate Rate of Returns",
+    "text": [
+      "How to Calculate Rate of Returns"
+    ],
+    "notes": "P1-p0 is capital gain when you sell at p1 and bought at p0 you pocket capital gain  \ncash flow may be coupon for bonds or dividends for stocks, only care about what the CF actually is if youre in tax or accounting\n\nMargined returns reflects the interest you pay when you borrow money , cash flow you receive, capital gain, divided by the money that you put in. \n\nTransaction costs \u2013 ignores tax but includes the transaction costs, this is net return\n\nShort sale \u2013 ppl have different views but he thinks more reasonable to assume that this",
+    "image_descriptions": []
+  },
+  {
+    "slide": 5,
+    "title": "Rate of Returns: Portfolio",
+    "text": [
+      "Rate of Returns: Portfolio"
+    ],
+    "notes": "How do we find portfolio rate or return?\nPortfolio - Proportion of capital invested in different assets\nAlpha \u2013 portfolio weight\nAlpha can be positive (long position) or negative (short position) if youre not allowed to short sale then you need to add constraint that values of alpha cant be negative.",
+    "image_descriptions": []
+  },
+  {
+    "slide": 6,
+    "title": "Example",
+    "text": [
+      "Example",
+      "Predicted return"
+    ],
+    "notes": "Return can be negative but when we set up portfolio we don\u2019t know the return will be negative \nNote we need predicted rate of return to do find the portfolio rate of return",
+    "image_descriptions": []
+  },
+  {
+    "slide": 26,
+    "title": "Capital Allocation",
+    "text": [
+      "Capital Allocation",
+      "Allocating capital between risky assets and risk free assets\nPossible to split investment funds between safe and risky assets\nRisk free asset: proxy; T-bills\nPerfectly price-indexed bond \u2013 the only risk free asset in real terms;\nT-bills are commonly viewed as \"the\" risk-free asset;\t\nMoney market funds - the most accessible risk-free asset for most investors.\nRisky asset: stock (or a portfolio) or mutual fund or a particular index fund\nCan represent the total investments in risky assets\nExamine risk/return tradeoff\nDemonstrate how different degrees of risk aversion will affect allocations between risky and risk free assets"
+    ],
+    "notes": "A money market fund is a kind of mutual fund that invests in highly liquid, near-term instruments. These instruments include cash, cash equivalent securities, and high-credit-rating, debt-based securities with a short-term maturity (such as U.S. Treasuries). Money market funds are intended to offer investors high liquidity with a very low level of risk. Money market funds are also called money market mutual funds.\n\nAssume you chose to invest in risky and risk free assets. Risky is a stock or index or mutual fund. We\u2019re not choosing the risky asset at this moment, just the portfolio. \nWhat is the proportion you\u2019ll invest in risky and risk free assets so that your utility will be maximized. What proportion will you invest in risk free and risky assets? This is capital allocation. Recall that risky will have higher return. \n\nAllocation between the two is capital allocation",
+    "image_descriptions": []
+  },
+  {
+    "slide": 27,
+    "title": "Portfolios of One Risky Asset and One Risk-Free Asset",
+    "text": [
+      "Portfolios of One Risky Asset and One Risk-Free Asset"
+    ],
+    "notes": "Same example as earlier for risky. \nSD is percent, variance is not percentage. Variance doesn\u2019t have units. \nRisk free doesn\u2019t have risk so variance is zero. \nIf constraint that y must be positive then means you cant short sell. \n\nThe lower y is the lower our expected return and the lower the standard deviation.",
+    "image_descriptions": []
+  },
+  {
+    "slide": 28,
+    "title": "Possible Combinations",
+    "text": [
+      "Possible Combinations",
+      "16.5%"
+    ],
+    "notes": "If we change y from 0 to 1  this is what curve looks like.  Expected return and standard deviation increases. Each point is a combination of an investment opportunity. We can choose to invest at any of the points on the line.\n If we invest more in risk free (smaller y) there is lower expected return and lower risk. If we invest in more of the risky portfolio the risk is higher but the return is lower\nWhere based on  your attitude towards risk where will you choose to invest? What is the best capital allocation? Or which point will we have highest utility?",
+    "image_descriptions": [
+      "Diagram plotting Capital Allocation Line combinations: E(r_P)=15%, E(r_C)=13%, r_f=7%, with weight-in-risky-asset (y) values 0, 0.25, 0.5, 0.75, 1 marked at points along the line, corresponding standard deviations sigma_C=16.5% and 22%."
+    ]
+  },
+  {
+    "slide": 29,
+    "title": "CAL (Capital Allocation Line)",
+    "text": [
+      "CAL (Capital Allocation Line)"
+    ],
+    "notes": "This line is called the capital allocation line. It is used to help\u00a0investors\u00a0understand the\u00a0return of an investment\u00a0compared to its risk. The ratio is the average return earned in excess of the risk-free rate per unit of\u00a0volatilityor total risk.\n\n\nRecall that risk premium is the expected return on the risky asset minus the return from the risk free asset. So were essentially dividing the risk premium from the standard deviation. This is Sharpe  ratio. When doing portfolio optimization this is what you want to maximize. \nAnother interpretation is this is the extra return per unit of risk. \n\nWe will talk later abut why we want to maximize the sharpe ratio\n\nRecall You can borrow money using margins to invest in higher risk assets and go further upper right on line to invest more than  100% (y=1) into risky asset. If we use 50% margin we can invest 200%  instead",
+    "image_descriptions": [
+      "Clean CAL (Capital Allocation Line) diagram: line from r_f=.07 through point P at E(r_P)=.15, sigma_P=.22. Shows the Sharpe ratio S = (E(r_P) - r_f) / sigma_P = .08/.22, i.e. the slope of the CAL."
+    ]
+  },
+  {
+    "slide": 30,
+    "title": "Using Leverage with Capital Allocation Line",
+    "text": [
+      "Using Leverage with Capital Allocation Line"
+    ],
+    "notes": "Leverage is same as borrowing saying the same thing\nCAL represents investment opportunities and how you choose to  invest  in risky vs risk free",
+    "image_descriptions": []
+  },
+  {
+    "slide": 31,
+    "title": "Optimal Allocation",
+    "text": [
+      "Optimal Allocation",
+      "Given an investor's risk aversion, how to determine the optimal allocation?"
+    ],
+    "notes": "Where will you choose to invest? Lets say an investors indifference curve is here. \nWe know if they only invest in risk free then Utility will be 0.07 (because u = 0.07-.5*A*0) for  this investment opportunity \nOr you can choose to invest at red dot where you\u2019ve invested 75 in risky and 25 in risk free based on CAL line\nWhich of these two options would you prefer? Youd prefer the one with 75/25 split because it increases utility\nWe can do better though, what if we choose to invest ant yellow dot. This proportion will increase utility even more. \nRed x isn\u2019t possible we cant achieve this level of utility\nIN SUMMARY we want to invest in rf asset and risky portfolio in the ratio that will achieve the highest utility \n\nSo the question is Amoung the feasible choices what is your best capital allocation? \nC is tangent  point of where you should invest. Has highest utility.\nWhat is the relationship between CAL and utility curve? The CAL is the tangent to the highest utility of where you should invest\n\nWhy do we care about sharpe ratio? You have two risky asset portfolio options P2 and P1 which risky portfolio would you prefer in this case? We need to know which would do better.\nLook at their CALs. Each one is a tangent to a different indifference curve. The indifference curves are all parallel to each other for a single investor (because same A) so investment opportunity with higher slope of CAL will be the tangent of an indifference curve with a larger value. Therefore in this case youd choose risky portfolio P2\n\nYou compare the portfiolios using their sharpe ratios if you want to compare the two portfolios quantitatively, its higher for P2 than P1 ebcasue of the slope of CAP.\nWhen choosing a portfolio choose the one with the highest slope to maximize the sharpe ratio.",
+    "image_descriptions": [
+      "Utility/indifference curve diagram with a worked numeric example: E(r_P)=.15, E(r_C)=.1028, r_f=.07, sigma_C=.0902, sigma_P=.22, multiple utility indifference curves (U=.094, .08653, .078, .07) shown tangent to the CAL, illustrating how an investor's risk aversion determines the optimal point C on the CAL between the risk-free asset and the risky portfolio P."
+    ]
+  },
+  {
+    "slide": 32,
+    "title": "CAL with Risk Preferences",
+    "text": [
+      "CAL with Risk Preferences"
+    ],
+    "notes": "If you\u2019ve chosen a risky portfolio, If youre more risk adverse your utility will be steeper (because for small increases in risk you require  large increases in return) and tangent will therefore generally be more to the left meaning you invest more in risk free and less in risky asset if youre less risk adverse its flatter and tangent point will be more to the right. \n\nEach person has their own version of the utility function",
+    "image_descriptions": []
+  },
+  {
+    "slide": 33,
+    "title": "Risk Aversion and Allocation Observations",
+    "text": [
+      "Risk Aversion and Allocation Observations",
+      "Greater levels of risk aversion lead to larger proportions of the risk free rate\nLower levels of risk aversion lead to larger proportions of the portfolio of risky assets\nWillingness to accept high levels of risk for high levels of returns would result in leveraged combinations"
+    ],
+    "notes": "",
+    "image_descriptions": []
+  },
+  {
+    "slide": 34,
+    "title": "Mathematically to dermine the best ratio of P and rf in CAL  that will maximize utility function\u2026",
+    "text": [
+      "Mathematically to dermine the best ratio of P and rf in CAL  that will maximize utility function\u2026",
+      "Note its derivative wrt y"
+    ],
+    "notes": "You have equation for expected return and standard deviation\nSubstitute them into utility function (requires you to sq sd)\nChoose capital allocation that will maximize utility by taking first order derivative setting to zero and solving for y.\nThis gives you top equation\n\nEquation makes sense because the larger the A or larger the risk the lower the y you should invest in risky. \n\nNote sigma p is risk of the risky portfolio, sigma c is combined risk",
+    "image_descriptions": []
+  },
+  {
+    "slide": 35,
+    "title": "General Case: investments inside of a Portfolio Mathematics",
+    "text": [
+      "General Case: investments inside of a Portfolio Mathematics",
+      "Note Sigma12 = sigma1*sigma2*rho"
+    ],
+    "notes": "Now were looking at expected return of each individual risky assets in a risky portfolio rather than risky portvolio and rf asset \n\nYou have two risky assets you can find expected return and varience. \nIn general case you inveset in n risky assets and portfolio will be represented by proportion youre investing in each asset\nCapital sigma E refers to covariance matrix.",
+    "image_descriptions": []
+  },
+  {
+    "slide": 36,
+    "title": "Continued \u2026",
+    "text": [
+      "Continued \u2026"
+    ],
+    "notes": "How do we actually choose the risky portfolio.\nYoure balancing investments between risky and risk free. \nFor any general portfolio you can represent it between risk and risk free. This is a general portolio with risk free and risky assets. \nThis portfolio can be written as 5% rf and 95% portfolio P .\n\nYou can redefine it to just see risky portfolio (rather than general portfolio). In a portfolio the sum of total investment ratios must be 1.\n\nNow that youre only looking at risky portfolio you can ask what is the best risky portfolio that will give you highest utility and forget about rf. This requires you to only look at risky portfolio not rf. They can just combine your risky portfolio with rf after. \n\nE(rp) = 1.7 and Thetap=6.06 comes from a spreadsheet that he did for this portfolio.",
+    "image_descriptions": []
+  },
+  {
+    "slide": 37,
+    "title": "Combining Risk Assets",
+    "text": [
+      "Combining Risk Assets",
+      "What happens if we choose a portfolio by combing risky assets\nTwo asset case\nExample: For 20% in 1 and 80% in 2\nExpected return 11.60%\nVariance 0.01512\nStandard deviation 0.1230\nGeneral case\nSee Session 1 Simple Illustration Excel"
+    ],
+    "notes": "Lets look at 2 risky asset in a risky portfolio case. Each has different return and sd. They have correlation (rho). You can have different combinations of the two in how many proportions you invest in each one. You can list a ll combinations and look at the results. Lets look at a single example of 80/20.\nWe use the formula from slide 35 and find variance and sqrt which is sd of this portfolio. You can also get expected return. \n\nWhat is possible portfolios? by changing ratio between 1 and 2 you can get all combinations and get a curve. Spreadsheet on portal\nRecall this is why in last slide we would want to look soley at our risky portfolio rather than our overall portfolio.",
+    "image_descriptions": []
+  },
+  {
+    "slide": 38,
+    "title": "Two-Security Portfolios with Different Correlations",
+    "text": [
+      "Two-Security Portfolios with Different Correlations"
+    ],
+    "notes": "This is curve you get from variying proportions in each asset.\n\nLets say if correlation is0.3, then that line represents all  possible investment combinations.\n\nThe lower the correlation the more you can choose to the left. \n\nShows effect of diversification \u2013 the lower the correlation the more you can reduce the risk\n\nSpreadsheet online shows this.",
+    "image_descriptions": [
+      "Diagram showing the diversification benefit of combining two risky assets D (E(r)=8%, sigma=12%) and E (E(r)=13%, sigma=20%) at different correlations (rho = -1, 0, .30, 1). Lower correlation bows the combination curve further left (lower risk for same return), illustrating that diversification benefit increases as correlation between assets decreases."
+    ]
+  },
+  {
+    "slide": 39,
+    "title": "Optimal Risky Portfolio with Two Risky Assets",
+    "text": [
+      "Optimal Risky Portfolio with Two Risky Assets",
+      "Suppose our investment universe comprises the two securities\u000b\u000b \n\n\n\n\nRisk free rate: 5%"
+    ],
+    "notes": "Here is an example  to show asset allocation and the question of what is the best portfolio.\n\nWe will look at implementation code in python later. \n\nYou have one risk free asset (5% expected return) and  two  risky assets (one with Er 8 and sd 12,  second asset has 13 return and 20sd) \nSo you have both risky and risk free assets\n\nIf you have a risk  adverse investor, what is best portfolio? Aka what is the proportion for rf, risky asset 1, and risky asset 2? How do we find best combo between risk free, first risky asset (debt) and second risky asset (equity)?\n\nYou can reorganize this question like what we talked about in slide 36. We can restate this as a  risk free portfolio and a risky portfolio (only consisting of risky assets). Now the question has changed to what is the best risky portfolio. And what fraction of investments are risky portfolio vs rf portfolio\nSee next slide",
+    "image_descriptions": [
+      "Table of a worked two-asset example: Debt (expected return 8%, standard deviation 12%) and Equity (expected return 13%, standard deviation 20%), covariance 0.0072, correlation coefficient 0.30, risk-free rate 5%. This is the running worked example used through slides 38-46 for constructing the optimal risky portfolio and optimal complete portfolio."
+    ]
+  },
+  {
+    "slide": 40,
+    "title": "Which Risky Portfolio is Better?",
+    "text": [
+      "Which Risky Portfolio is Better?"
+    ],
+    "notes": "The curve is what the combination will look like with just the two risky assets and not the risk free\n\nAny portfolio along this curve represents a portfolio using the two risky assets. \n\nAt which point on the curve should we choose? Recall we want capital allocation line CAL of our portfolio to have high sharpe ratio? So we prefer B>A because higher slope for that portfolios CAL. Quantitatively this is sharpe ratio. \nRecall we need to maximize sharpe ratio to maximimize utility \n\n\nWe need to take CAL into consideration because we are also investing in rf",
+    "image_descriptions": [
+      "Diagram comparing two Capital Allocation Lines, CAL(A) and CAL(B), both drawn from the same risk-free rate to different points on the risky-asset opportunity set (curve through D at 8%/12% and E at 13%/20%). CAL(B) has a steeper slope (higher Sharpe ratio) than CAL(A), illustrating that different combinations of the same two risky assets produce different, comparable CALs -- the steeper one is preferred."
+    ]
+  },
+  {
+    "slide": 41,
+    "title": "Optimal CAL and the Optimal Risky Portfolio",
+    "text": [
+      "Optimal CAL and the Optimal Risky Portfolio"
+    ],
+    "notes": "The tangent point is best place to invest.because this is where CAL will have highest slope. \n\nFor D the capital allocation line will give us a lower indifference curve than at a higher tangent at P which will give us a higher level of utility. This is quantified by sharpe ratio. \n\nThis is on his spreadsheet. He shows how to maximize sharpe ratio (see next slide)",
+    "image_descriptions": [
+      "Diagram showing the tangency portfolio construction: CAL(P) is the single CAL with the steepest slope, tangent to the opportunity set of risky assets (the curve through D and E) at point P. r_f=5%. This tangency point P is the optimal risky portfolio -- the one combination of risky assets that maximizes the Sharpe ratio."
+    ]
+  },
+  {
+    "slide": 42,
+    "title": "Determination of the Optimal Overall Portfolio",
+    "text": [
+      "Determination of the Optimal Overall Portfolio"
+    ],
+    "notes": "If youre more risk adverse youd invest closer to the left in more risk free, and if less risk adverse more in the right in less risk free. \nBest risky portfolio is one that has highest sharpe ratio. \n\n\nNeumerator of sharpe ratio is return in excess of risk free, denominator is risk. You want to maximize this value to get the highest compensation rate per unit of risk. \n\n\nIn next slide we see\nIf we do analytical approach were maximizing utility, if we do the two step approach we first find P portfolio but then we need to add in Rf which gives c. The tangent portfolio is the same for every risk adverse investor but C is specific for your level of risk adversary depending on A. As long as youre risk adverse youll always choose P. \n\nSO I THINK that complete portfolio is how yo should brak up your risky portfolio and rf portfolio, then the optimal risky portfolio is the best allocation between the individual risky assets in the potfolio.",
+    "image_descriptions": [
+      "Diagram showing the full optimal-portfolio construction: an indifference curve tangent to CAL(P) at point C (the optimal complete portfolio, combining risk-free asset and portfolio P), with P itself being the tangency point between CAL(P) and the risky-asset opportunity set (optimal risky portfolio). Annotated with the Sharpe-ratio-style objective being maximized, (E(r_P) - r_f) / sigma_P^2, i.e. maximizing return per unit of variance when choosing the allocation to the risky portfolio."
+    ]
+  },
+  {
+    "slide": 43,
+    "title": "Final Portfolio",
+    "text": [
+      "Final Portfolio"
+    ],
+    "notes": "There are two ways  to do this calculation for the final portfolio ratio\nDirectly maximize expected utility where r is your portolio which has three unknowns which are x1,x2,x3 for each of the risky assets and the rf asset. you can find expected return and variance that directly maximizes this problem. This will give you those percentages. THIS IS IN SPREADSHEET AND IS GOOD\nForget about A and rf. Just do what we did in last slode to find tangent portfolio which is the risk portfolio specifically the Erp and theta p which end up being 11 and 14.2. then we adjust for including rf using equation from slide 34 to get y for how much should be in risky portfolio p. \n\n\nRisk portfolio is tangent portfolio where sharpe ratio is maximized. C is given after we add in risk aversion.",
+    "image_descriptions": [
+      "Pie chart showing the final complete portfolio allocation from the worked example: Portfolio P (the risky allocation) is 74.39% of the complete portfolio, split into Stocks 44.63% and Bonds 29.76% within P, plus T-bills (the risk-free asset) 25.61% of the complete portfolio."
+    ]
+  },
+  {
+    "slide": 44,
+    "title": "Extending Concepts to All risky Securities (INSTAD OF JUST 2)",
+    "text": [
+      "Extending Concepts to All risky Securities (INSTAD OF JUST 2)",
+      "The optimal combinations result in lowest level of risk for a given return\nThe optimal trade-off is described as the efficient frontier\nThese portfolios are dominant"
+    ],
+    "notes": "Now you have many different single securities. What is best choice of portfolio you can use? You can look at combo of different risky assets  here. If we draw a horizontal line it\u2019s the same expected return but we want the lowest risk. If we draw verticlae line there is same risk but we want highest expected return.\nSo in the general case we always choose the efficient frontier portfolio (upper half)\nFrontier portfolio is any portfolio on bound. \n\nThis is similar to the two asset case. \nNot everyone will choose same portfolio because some will want to invest more heavily in rf (x axis  is 0) and others want to infest more in risky. \n\nIf youre risk adverse you wont choose anything inside because youd rather take something with same level of return with lowest risk aka whatever is on the frontier",
+    "image_descriptions": [
+      "Diagram generalizing from two risky assets to many: shows the efficient frontier (upper boundary of the minimum-variance frontier) plotted against many individual assets (dots) inside it, with the global minimum-variance portfolio marked at the leftmost point of the frontier. Illustrates that with many risky assets, the same CAL-tangency logic applies to the efficient frontier as a whole rather than just two assets."
+    ]
+  },
+  {
+    "slide": 45,
+    "title": "Extending to Include A Riskless Asset",
+    "text": [
+      "Extending to Include A Riskless Asset",
+      "The set of opportunities again described by the CAL\nThe choice of the optimal portfolio depends on the client's risk aversion\nA single combination of risky and riskless assets will dominate"
+    ],
+    "notes": "We want to choose best risky portfolio which will be the one with the highest sharpe ratio.",
+    "image_descriptions": []
+  },
+  {
+    "slide": 46,
+    "title": "Alternative CALs",
+    "text": [
+      "Alternative CALs"
+    ],
+    "notes": "Why doesn\u2019t everyone choose the lowest risk portfolio G? because P is tangent portfolio meaning you get higher returns for that increased risk. \nYou can still choose A if youre very risk adverse and just invest in more risk free (youre still in some risk tho) \nPortfolio manager will always invest in tangent portfolio.",
+    "image_descriptions": [
+      "Diagram showing three alternative CALs -- CAL(P), CAL(A), CAL(G) -- each tangent to the efficient frontier of risky assets at a different point (P, A, G respectively), with G being the Global Minimum-Variance Portfolio (leftmost point on the frontier). Illustrates that of all possible CALs, the one tangent at the point maximizing the Sharpe ratio (steepest slope) is the single optimal CAL, matching what slide 41 establishes."
+    ]
+  },
+  {
+    "slide": 47,
+    "title": "Portfolio Selection & Risk Aversion with Borrowing/Lending",
+    "text": [
+      "Portfolio Selection & Risk Aversion with Borrowing/Lending"
+    ],
+    "notes": "So youre adjusting for your risk adversion. \nIf less risk adverse the tangent portfolio is more to the right",
+    "image_descriptions": []
+  },
+  {
+    "slide": 48,
+    "title": "Session 2 Code \u2013 MV analysis",
+    "text": [
+      "Session 2 Code \u2013 MV analysis"
+    ],
+    "notes": "So youre adjusting for your risk adversion. \nIf less risk adverse the tangent portfolio is more to the right",
+    "image_descriptions": []
+  }
+]
