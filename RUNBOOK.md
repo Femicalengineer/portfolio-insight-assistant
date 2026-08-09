@@ -179,3 +179,13 @@ Practical "how do I actually do X" reference for this project — the concrete c
 - **Validate against a real worked example with a known answer**, not just "it ran without an error" — the MPT deck's own slide 36 (Debt 8%/12%σ, Equity 13%/20%σ, correlation 0.30, risk-free 5%) has a stated final answer (~40/60 optimal risky-asset split) to check the code against directly, rather than trusting arbitrary placeholder numbers.
 
 **Sanity check:** ask the specialist a real question with concrete numbers and confirm the tool's output matches a hand-calculated (or deck-verified) answer — not just that the agent responds fluently.
+
+## Embedding the MPT deck corpus into Chroma (step 5, concepts specialist groundwork)
+
+- Reuses 003's exact pattern: `HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")` (**keyword argument only** — passing the model name positionally raises `TypeError: takes 1 positional argument but 2 were given`), `Document(page_content=..., metadata={...})` objects, `Chroma.from_documents(documents=..., embedding=..., collection_name=..., ids=[...])`.
+- **`page_content` needs to be joined plain text, not `str()` on a list.** The corpus's `text` and `image_descriptions` fields are `list[str]` — calling `str(some_list)` embeds the literal Python repr (brackets, quotes, commas) as text. Use `" ".join(...)` instead, so the embedding sees natural language.
+- **`.persist()` is deprecated** (Chroma 0.4.x+ auto-persists) — the thing that actually matters is passing `persist_directory=...` directly to `Chroma.from_documents(...)`. Without it, the store is in-memory only regardless of any `.persist()` call afterward.
+- A `None` value in Chroma document metadata (some slides have `title: None`, since they have no text frames) turned out not to cause any issue — confirmed by actually running it, not assumed.
+- Output: `012_app/agent_service/data/chroma_mpt_deck_vectorstore/` (persisted Chroma collection, 27 documents, one per in-scope slide, metadata: `slide`, `title`, `section`).
+
+**Sanity check:** confirm the persist directory actually contains a real `chroma.sqlite3` file with a nonzero size after running — "no errors printed" isn't proof anything was actually written to disk.

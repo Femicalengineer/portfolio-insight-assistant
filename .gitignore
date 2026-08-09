@@ -1,3 +1,4 @@
 .env
 __pycache__/
 *.pyc
+012_app/agent_service/data/chroma_mpt_deck_vectorstore/

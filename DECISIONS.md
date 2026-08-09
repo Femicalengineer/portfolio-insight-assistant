@@ -94,6 +94,11 @@ Each entry: the decision, the options considered, and the reasoning.
 - **Decision:** split
 - **Reasoning:** Sarah deferred this to "whatever's best from a hiring-manager perspective." Shipping a thin, actually-deployed slice first de-risks the deploy step (cloud/Docker friction) before investing time in the full multi-agent system, and produces two demonstrable milestones instead of one all-or-nothing push — itself a defensible engineering-practice story for an interview.
 
+### Chunking strategy for the MPT deck corpus: one chunk per slide, no further splitting
+- **Options considered:** (A) further split slides by size/overlap, the standard chunking approach from 003; (B) treat each slide as exactly one chunk, no splitting
+- **Decision:** B
+- **Reasoning:** each slide is already a bounded, coherent unit built around one concept — that's what a presentation slide is designed to be. Splitting further would risk separating a slide's explanation from its own worked example or image description (e.g. slide 31's utility-curve discussion and its numeric example), which would hurt retrieval quality rather than help it. None of the 27 in-scope slides are long enough (the largest is under 2000 characters) to run into the problem size-based chunking normally exists to solve. Resolves the "chunking strategy" item that had been sitting in `PLAN.md`'s open decisions.
+
 ### MPT deck content extraction: vision-generated text descriptions for image-heavy slides, not notes-only or full multimodal retrieval
 - **Options considered:** (A) extract only slide text + speaker notes, treat that as the full RAG corpus; (B) also generate text descriptions of each slide's images via a vision-capable model at prep time, and fold those descriptions into the same text corpus; (C) full multimodal retrieval — store the actual images, retrieve them alongside text, and have the answering model (vision-capable) reason over the real image at query time
 - **Decision:** B
