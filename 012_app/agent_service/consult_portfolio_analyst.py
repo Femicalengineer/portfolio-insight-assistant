@@ -41,18 +41,16 @@ def optimal_risky_share(portfolio_return: float, portfolio_volatility: float, ri
     return (portfolio_return - risk_free_rate) / (risk_aversion * portfolio_volatility ** 2)
 
 
-# ---------------------------------------------------------------------------
-# Tool: the actual portfolio math.
 
-# ---------------------------------------------------------------------------
 
 class ArgsSchema(BaseModel):
-    tickers: list[str] = Field(..., description="List of stock tickers in the portfolio")
-    expected_returns: list[float] = Field(..., description="List of expected returns for each stock in the portfolio")
-    volatilities: list[float] = Field(..., description="List of volatilities for each stock in the portfolio")
-    correlations: list[list[float]] = Field(..., description="Matrix of correlations between stocks in the portfolio")
-    risk_free_rate: float = Field(..., description="The risk-free rate")
-    risk_aversion: float = Field(..., description="The risk aversion parameter")
+    tickers: list[str] = Field(..., description="List of stock tickers in the portfolio")  # labels only -- not used in any calculation
+    expected_returns: list[float] = Field(..., description="List of expected returns for each stock in the portfolio")  # E(r_i): mean/average return assumed for each asset
+    volatilities: list[float] = Field(..., description="List of volatilities for each stock in the portfolio")  # sigma_i: standard deviation of each asset's returns
+    correlations: list[list[float]] = Field(..., description="Matrix of correlations between stocks in the portfolio")  # how each pair of assets moves together: -1 to +1, diagonal always 1
+    risk_free_rate: float = Field(..., description="The risk-free rate")  # r_f: return of a theoretically riskless asset (e.g. a T-bill) -- the baseline everything else is measured against
+    risk_aversion: float = Field(..., description="The risk aversion parameter")  # A: higher = more risk-averse (safer split), lower = more risk-tolerant (leans into more risk/leverage)
+
 
 
 
