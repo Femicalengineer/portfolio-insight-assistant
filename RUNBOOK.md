@@ -158,3 +158,24 @@ Practical "how do I actually do X" reference for this project — the concrete c
 - Output: `012_app/agent_service/data/mpt_deck_content.json`, scoped to slides 3–6 and 26–48 only (see `DECISIONS.md`'s knowledge-base-scope decision) — 27 slide entries, 10 with image descriptions.
 
 **Sanity check:** spot-check a few entries against the actual deck — does the extracted text/notes match what's on the slide, and does the written image description actually match what the chart shows (numbers, axis labels, the specific relationship being illustrated), not just a generic "this is a chart about portfolio theory."
+
+## Building `consult_portfolio_analyst` (step 5)
+
+- Unlike `get_quote`, this specialist's tool (`analyze_portfolio`) is a **local `@tool`**, not MCP-sourced — no external server involved, just computation on given inputs. Same `create_agent`-wrapping-a-tool shape as `consult_market_trading_specialist`, just a local `@tool` instead of an MCP-loaded one.
+- **Per-argument descriptions on a tool**, via a Pydantic `args_schema`, matter a lot once a tool has several parameters (this one has six, some structurally complex like a correlation matrix) — worth doing whenever a tool's inputs aren't self-explanatory from bare type hints alone:
+  ```python
+  from pydantic import BaseModel, Field
+  from langchain_core.tools import tool
+
+  class ArgsSchema(BaseModel):
+      some_param: float = Field(..., description="...")
+
+  @tool(args_schema=ArgsSchema)  # NOT arg_schema (no 's') -- and pass the class itself, not `.schema()`'s dict output
+  def my_tool(some_param: float) -> dict:
+      ...
+  ```
+- **Given/assumed inputs vs. computed outputs, a distinction worth keeping straight:** each asset's own expected return/volatility/correlation are facts about the assets (can't be derived by the tool, have to come from outside — historical data, estimates, or given inputs per the decision in `DECISIONS.md`). Portfolio *weights*, by contrast, are the decision variable this specific tool exists to solve for — supplying them as an input would be circular. Don't conflate "things that must be given" with "things the calculation produces."
+- **Testing a `@tool`-decorated function directly (not through an agent) uses `.invoke({...})`, not a plain function call** — `@tool` turns the function into a LangChain tool object, so `my_tool(x=1, y=2)` doesn't work the way it did before decorating; `my_tool.invoke({"x": 1, "y": 2})` does. Same "test as a plain function first, decorate once the logic's proven" progression as `get_quote`, just with `.invoke()` as the test call once `@tool` is live, instead of reverting the decorator.
+- **Validate against a real worked example with a known answer**, not just "it ran without an error" — the MPT deck's own slide 36 (Debt 8%/12%σ, Equity 13%/20%σ, correlation 0.30, risk-free 5%) has a stated final answer (~40/60 optimal risky-asset split) to check the code against directly, rather than trusting arbitrary placeholder numbers.
+
+**Sanity check:** ask the specialist a real question with concrete numbers and confirm the tool's output matches a hand-calculated (or deck-verified) answer — not just that the agent responds fluently.
