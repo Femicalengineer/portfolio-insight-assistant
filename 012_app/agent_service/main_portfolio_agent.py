@@ -51,20 +51,10 @@ main_agent = create_agent(
 )
 
 
-
-#   - does consult_portfolio_analyst need a few-shot worked example to anchor
-#     its calculation format, or is zero-shot with clear instructions enough?
-#   - how tightly should each specialist's prompt scope its role -- e.g.
-#     should consult_concepts_specialist be explicitly told to only answer
-#     from retrieved context, not speculate?
-#   - does a financial-disclaimer guardrail belong partly in
-#     main_portfolio_agent's own system prompt as a first line of defense,
-#     not just as a post-hoc check layered on later?
-# Log the actual decisions (and why) in DECISIONS.md once made.
-
-
 def main():
-    # main_agent has to be invoked async -- consult_market_trading_specialist_agent
-    # is an async tool (it reaches down to get_quote, which is only ever async), and
-    # once one tool in the set is async, the whole invocation path needs to be too.
-    result = asyncio.run(main_agent.ainvoke({"messages": [{'role': 'user', 'content': "What is the current price of AAPL, and given AAPL has an expected return of 12% and volatility of 25%, and Microsoft has an expected return of 15% and volatility of 22%, with a correlatio
+    result = asyncio.run(main_agent.ainvoke({"messages": [{'role': 'user', 'content': "What is the current price of AAPL, and given AAPL has an expected return of 12% and volatility of 25%, and Microsoft has an expected return of 15% and volatility of 22%, with a correlation of 0.4, a risk-free rate of 4%, and a risk aversion of 2, what's the optimal allocation between them? Also, what does the Sharpe ratio measure"}]}))
+    print(result["messages"][-1].content)
+
+
+if __name__ == "__main__":
+    main()

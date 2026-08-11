@@ -278,28 +278,4 @@
     ],
     "notes": "Why doesn\u2019t everyone choose the lowest risk portfolio G? because P is tangent portfolio meaning you get higher returns for that increased risk. \nYou can still choose A if youre very risk adverse and just invest in more risk free (youre still in some risk tho) \nPortfolio manager will always invest in tangent portfolio.",
     "image_descriptions": [
-      "Diagram showing three alternative CALs -- CAL(P), CAL(A), CAL(G) -- each tangent to the efficient frontier of risky assets at a different point (P, A, G respectively), with G being the Global Minimum-Variance Portfolio (leftmost point on the frontier). Illustrates that of all possible CALs, the one tangent at the point maximizing the Sharpe ratio (steepest slope) is the single optimal CAL, matching what slide 41 establishes."
-    ],
-    "section": "Optimal Risky Portfolio"
-  },
-  {
-    "slide": 47,
-    "title": "Portfolio Selection & Risk Aversion with Borrowing/Lending",
-    "text": [
-      "Portfolio Selection & Risk Aversion with Borrowing/Lending"
-    ],
-    "notes": "So youre adjusting for your risk adversion. \nIf less risk adverse the tangent portfolio is more to the right",
-    "image_descriptions": [],
-    "section": "Optimal Risky Portfolio"
-  },
-  {
-    "slide": 48,
-    "title": "Session 2 Code \u2013 MV analysis",
-    "text": [
-      "Session 2 Code \u2013 MV analysis"
-    ],
-    "notes": "So youre adjusting for your risk adversion. \nIf less risk adverse the tangent portfolio is more to the right",
-    "image_descriptions": [],
-    "section": "Optimal Risky Portfolio"
-  }
-]
+      "Diagram showing three alternative CALs -- CAL(P), CAL(A), CAL(G) -- each tangent to the efficient frontier 
