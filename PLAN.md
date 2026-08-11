@@ -6,7 +6,7 @@ Planning conversation from 2026-07-31/08-01. Not yet built — this is the agree
 
 **What happened 2026-08-07, worth knowing before touching the Concepts specialist:** while prepping to build `consult_portfolio_analyst`, reviewing the MPT deck surfaced two things that reshaped `consult_concepts_specialist`'s scope. First, most of the deck's real content turned out to be in plots/diagrams, not slide text — a text-only RAG corpus would have silently lost most of the substance, so each image-bearing slide's chart was manually reviewed and given a written description, folded into the same text corpus rather than building separate multimodal retrieval infrastructure (see `DECISIONS.md`). Second, on reviewing the content, the CAPM/Single Index Model/Fama-French sections turned out to serve no actual use case in this system (none of the specialists estimate returns via a pricing model — Portfolio Analyst uses given/assumed inputs) — so the knowledge base was permanently scoped down to just rate-of-return + capital-allocation/optimal-portfolio content (slides 3–6, 26–48), not the full deck. The extracted, structured corpus is at `012_app/agent_service/data/mpt_deck_content.json`, ready for chunking/embedding whenever `consult_concepts_specialist` actually gets built.
 
-**This project has three companion docs, read together:** `PLAN.md` (this file) — what's being built and in what order; `DECISIONS.md` — why each nontrivial choice was made, kept so Sarah can explain her reasoning in an interview; `RUNBOOK.md` — practical "how do I actually do X" reference (exact commands, gotchas, how each piece was sanity-checked), covering things like Questrade account setup, the OAuth token exchange, MCP tool wrapping, and Docker. If picking up mid-build, check `RUNBOOK.md` before re-deriving a procedure from scratch — it's very likely already documented there.
+**This project has three companion docs, read together:** `PLAN.md` (this file) — what's being built and in what order, including a running "Notes queued for `012_capstone.ipynb`" list further down; `DECISIONS.md` — why each nontrivial choice was made, kept so Sarah can explain her reasoning in an interview; `RUNBOOK.md` — practical "how do I actually do X" reference (exact commands, gotchas, how each piece was sanity-checked), covering things like Questrade account setup, the OAuth token exchange, MCP tool wrapping, and Docker. If picking up mid-build, check `RUNBOOK.md` before re-deriving a procedure from scratch — it's very likely already documented there.
 
 **Who Sarah is, and the goal:** Sarah is self-teaching to become an **LLM Application Engineer**, building her own curriculum of numbered Jupyter notebooks rather than following a pre-made course. By her own direct statement, her LLM/ML knowledge is scoped entirely to what these notebooks have covered — don't assume outside professional background; explain genuinely new tools/concepts ground-up rather than assuming familiarity (this has been direct, confirmed feedback across the project).
 
@@ -115,6 +115,13 @@ Internal order revised 2026-08-03 (see `DECISIONS.md`, "012a internal build orde
 
 - Exact eval-set design for the Portfolio Analyst's ground-truth math checks
 - Whether the Gradio frontend gets its own deploy target or stays local-only for the demo
+
+## Notes queued for `012_capstone.ipynb`
+
+Lessons/concepts that came up *while building* the capstone and are genuinely new (or newly-deepened) material — belongs in the capstone notebook's own write-up once it exists, not retroactively injected into already-completed notebooks 010/011. Running list, add to it as more come up:
+
+- **FastMCP `@mcp.custom_route`**: plain HTTP routes (like `/health`) living alongside `@mcp.tool()`-decorated MCP tools in the same server — and that curl/a browser can hit `custom_route`s directly since they don't go through the MCP protocol, unlike tools. (Surfaced building `questrade_mcp_server.py`'s `/health` endpoint.)
+- **`asyncio.run()` can't be called from inside an already-running event loop.** Concretely: a sync-wrapped async function (`def main(): return asyncio.run(get_agent())`) is safe to call from plain sync code, but not from inside another async context that's already running inside its own `asyncio.run(...)` — that needs a direct `await` on the raw async function instead, skipping `asyncio.run()` entirely. (Surfaced wiring `consult_market_trading_specialist_agent` as an async tool inside `main_portfolio_agent.py`, since it has to reach down to the async-only `get_quote` MCP tool.)
 
 ## Status
 
