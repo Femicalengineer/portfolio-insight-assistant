@@ -8,14 +8,14 @@ import asyncio
 from langchain_core.tools import tool
 from langchain.agents import create_agent
 
-
 import consult_market_trading_specialist
 import consult_portfolio_analyst
 import consult_concepts_specialist
 
+
+
 if not os.environ.get("ANTHROPIC_API_KEY"):
     os.environ["ANTHROPIC_API_KEY"] = getpass.getpass("Enter your Anthropic API key: ")
-
 
 
 @tool
@@ -23,7 +23,6 @@ def consult_portfolio_analyst_agent(question: str) -> str:
     '''Consult the portfolio analyst agent with a question and return the answer.'''
     result = consult_portfolio_analyst.main().invoke({"messages": [{'role': 'user', 'content': question}]})
     return result["messages"][-1].content
-
 
 @tool
 async def consult_market_trading_specialist_agent(question: str) -> str:
@@ -47,7 +46,6 @@ main_agent = create_agent(
     ],
     system_prompt = "You are a helpful assistant that can answer questions about finance and investing. You have access to three tools: consult_portfolio_analyst_agent, consult_market_trading_specialist_agent, and consult_concepts_specialist_agent. Use these tools to answer questions accurately and concisely. If they don't answer what you need, do not use your own knowldge or speculate. Instead, respond with 'I don't know.' If a question spans multiple tools, use them in sequence and combine their answers.",
     name = "main_portfolio_agent"
-
 )
 
 
