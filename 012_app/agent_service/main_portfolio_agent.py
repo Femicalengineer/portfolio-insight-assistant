@@ -67,9 +67,4 @@ def main():
     # main_agent has to be invoked async -- consult_market_trading_specialist_agent
     # is an async tool (it reaches down to get_quote, which is only ever async), and
     # once one tool in the set is async, the whole invocation path needs to be too.
-    result = asyncio.run(main_agent.ainvoke({"messages": [{'role': 'user', 'content': "What is the current price of AAPL, and given AAPL has an expected return of 12% and volatility of 25%, and Microsoft has an expected return of 15% and volatility of 22%, with a correlation of 0.4, a risk-free rate of 4%, and a risk aversion of 2, what's the optimal allocation between them? Also, what does the Sharpe ratio measure"}]}))
-    print(result["messages"][-1].content)
-
-
-if __name__ == "__main__":
-    main()
+    result = asyncio.run(main_agent.ainvoke({"messages": [{'role': 'user', 'content': "What is the current price of AAPL, and given AAPL has an expected return of 12% and volatility of 25%, and Microsoft has an expected return of 15% and volatility of 22%, with a correlatio

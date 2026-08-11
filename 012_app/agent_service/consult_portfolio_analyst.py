@@ -97,7 +97,7 @@ def main():
 
     agent = create_agent(
         model= 'claude-haiku-4-5',
-        system_prompt = "You are a helpful assistant with access to a tool that will analyze a portfolio of risky assets and determine the optimal allocation among them and between the risky portfolio and a risk-free asset.",
+        system_prompt = "You are a helpful assistant with access to a tool that will analyze a portfolio of risky assets and determine the optimal allocation among them and between the risky portfolio and a risk-free asset. If you do not have the information you need to call the tool correctly (expected returns, volatilities, correlations, risk-free rate, or risk aversion), ask the user for the missing values -- don't speculate using your own knowledge. Additionally, if you don't have the knowledge you need after calling the tool, also don't speculate.",
         tools=[analyze_portfolio],
     )
     return agent
