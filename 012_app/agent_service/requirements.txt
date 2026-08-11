@@ -1,0 +1,9 @@
+langchain
+langchain-anthropic
+langchain-classic
+langchain-chroma
+langchain-huggingface
+langchain-mcp-adapters
+langgraph
+pydantic
+sentence-transformers
