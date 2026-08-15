@@ -7,3 +7,5 @@ langchain-mcp-adapters
 langgraph
 pydantic
 sentence-transformers
+fastapi[standard]
+lark
