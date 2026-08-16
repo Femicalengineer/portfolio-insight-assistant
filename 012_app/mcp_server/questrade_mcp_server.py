@@ -42,6 +42,7 @@ def get_access_token() -> dict:
 
    load_dotenv(override=True)
    token = os.environ.get("QUESTRADE_REFRESH_TOKEN")
+   print(f"DEBUG: token is {'None' if token is None else f'{len(token)} chars'}")
 
    response = requests.post(url="https://login.questrade.com/oauth2/token", params={"grant_type": "refresh_token", "refresh_token": token}).json()
 
@@ -81,6 +82,8 @@ async def get_quote(symbol: str) -> float:
     response = requests.get(url=f"{api_server}v1/markets/quotes", params={"ids": symbol}, headers={"Authorization": f"Bearer {access_token}"}).json()
 
     quote = response['quotes'][0]['askPrice']
+    if quote is None:
+        quote = response['quotes'][0]['lastTradePrice']
 
     return quote
 
