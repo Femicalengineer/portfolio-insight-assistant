@@ -80,6 +80,7 @@ async def get_quote(symbol: str) -> float:
 
     # Get quote for ID
     response = requests.get(url=f"{api_server}v1/markets/quotes", params={"ids": symbol}, headers={"Authorization": f"Bearer {access_token}"}).json()
+    print(f"DEBUG: quotes response: {response}")
 
     quote = response['quotes'][0]['askPrice']
     if quote is None:
