@@ -4,7 +4,6 @@ import os
 import getpass
 
 from langchain_chroma import Chroma
-from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_core.documents import Document
 
 from langchain_classic.retrievers.multi_query import MultiQueryRetriever
@@ -22,8 +21,13 @@ from langchain_core.structured_query import (
 from langchain_anthropic.chat_models import ChatAnthropic
 from langchain_core.tools import tool
 
-from sentence_transformers import CrossEncoder
 from langchain.agents import create_agent
+# torch/sentence-transformers/langchain_huggingface are deliberately NOT imported
+# at module level -- they're heavy enough (~250MB+ just to import, before loading
+# any model weights) that importing them at server startup was enough on its own
+# to exceed Render's free-tier 512MB RAM limit and get the container OOM-killed
+# before it ever finished booting. Deferred into the functions that actually use
+# them so startup stays lightweight; the cost is only paid on first real use.
 
 def get_llm(temperature = 0.2, max_tokens = 500):
     """
@@ -47,6 +51,7 @@ logging.getLogger("langchain.retrievers.multi_query").setLevel(logging.INFO)
 
 
 def load_vectorstore() -> Chroma:
+    from langchain_huggingface import HuggingFaceEmbeddings
     vectorstore = Chroma(
         collection_name='slide_data',
         persist_directory='data/chroma_mpt_deck_vectorstore',
@@ -145,6 +150,7 @@ def retrieve_results(query: str) -> str:
 
     results = multi_query_retriever.invoke(query)
 
+    from sentence_transformers import CrossEncoder
     reranker = CrossEncoder('cross-encoder/ms-marco-MiniLM-L-6-v2')
 
     pairs = [(query, d.page_content) for d in results]
